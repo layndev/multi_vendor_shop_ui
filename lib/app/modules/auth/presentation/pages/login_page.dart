@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/configs/core_config.dart';
 import '../../../../core/consts/color.dart';
 import '../../../../core/consts/img.dart';
 
 class LoginPage extends StatelessWidget {
-  Container _buildContainer(BuildContext context) {
+  Container _buildContentContainer(BuildContext context) {
     return Container(
       width: getWidth(context),
       height: getHeight(context),
@@ -23,7 +24,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  final Text wellcome = Text(
+  final Text _wellcome = Text(
     'Bem-Vindo',
     style: TextStyle(
         color: PRIMARY_COLOR,
@@ -32,7 +33,7 @@ class LoginPage extends StatelessWidget {
         fontStyle: FontStyle.italic),
   );
 
-  final Text wellcomeText = Text(
+  final Text _wellcomeText = Text(
     'Ao seu supermercado \nVirtual',
     style: TextStyle(
       color: Colors.black45,
@@ -42,7 +43,10 @@ class LoginPage extends StatelessWidget {
   );
 
   Widget _buildCustomButton(String text, Color backgroundColor,
-      {BuildContext context, Color textColor, double elevation}) {
+      {BuildContext context,
+      Color textColor,
+      double elevation,
+      VoidCallback onPressed}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
@@ -53,7 +57,7 @@ class LoginPage extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(60.0)),
           color: backgroundColor,
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(
             text,
             style: TextStyle(color: textColor, fontWeight: FontWeight.bold),
@@ -69,13 +73,15 @@ class LoginPage extends StatelessWidget {
       children: [
         Image.asset(LOGO_NAMED),
         SizedBox(height: 20.0),
-        wellcome,
-        wellcomeText,
+        _wellcome,
+        _wellcomeText,
         Expanded(child: SizedBox()),
         _buildCustomButton(
           'Registar',
           Theme.of(context).cardColor,
           context: context,
+          onPressed: () =>
+              Modular.to.pushNamed('/signup'),
         ),
         SizedBox(height: 20.0),
         _buildCustomButton(
@@ -92,7 +98,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(child: _buildContainer(context)),
+      body: SingleChildScrollView(child: _buildContentContainer(context)),
     );
   }
 }
