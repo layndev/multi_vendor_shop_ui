@@ -29,7 +29,7 @@ class SignUpPage extends StatelessWidget {
     ),
   );
 
- final Text _loginWithSocialNetwork = Text(
+  final Text _loginWithSocialNetwork = Text(
     'Entrar com redes sociais ou digite seus dados',
     overflow: TextOverflow.visible,
     style: TextStyle(
@@ -137,11 +137,10 @@ class SignUpPage extends StatelessWidget {
     );
   }
 
-  Container _buildContentContainer(BuildContext context) {
+  Widget _buildContentContainer(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 40.0),
-      height: getHeight(context),
       width: getWidth(context),
+      padding: EdgeInsets.all(40.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -164,10 +163,16 @@ class SignUpPage extends StatelessWidget {
           _buildTextFormField(_authCtrllr.nameCtrllr, 'Nome', USER_ICON),
           _buildTextFormField(_authCtrllr.emailCtrllr, 'Email', MAIL_ICON),
           _buildTextFormField(_authCtrllr.passwordCtrllr, 'Senha', LOCK_ICON),
-          Expanded(child: SizedBox()),
+          SizedBox(height: 40),
           _buildTermsAcceptance(),
           SizedBox(height: 40),
-          Center(child: _buildSignupButton(context, onPressed: () {}))
+          Center(
+            child: _buildSignupButton(
+              context,
+              onPressed: () =>
+                  Modular.to.pushNamedAndRemoveUntil('/', (_) => false),
+            ),
+          )
         ],
       ),
     );
@@ -177,9 +182,7 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).cardColor,
-      body: SingleChildScrollView(
-        child: _buildContentContainer(context),
-      ),
+      body: SingleChildScrollView(child: _buildContentContainer(context)),
     );
   }
 }

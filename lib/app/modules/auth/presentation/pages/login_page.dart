@@ -80,17 +80,15 @@ class LoginPage extends StatelessWidget {
           'Registar',
           Theme.of(context).cardColor,
           context: context,
-          onPressed: () =>
-              Modular.to.pushNamed('/signup'),
+          onPressed: () => Modular.to.pushNamed('/auth/signup'),
         ),
         SizedBox(height: 20.0),
-        _buildCustomButton(
-          'Entrar',
-          Colors.black26,
-          elevation: 0.0,
-          textColor: Theme.of(context).cardColor,
-          context: context,
-        ),
+        _buildCustomButton('Entrar', Colors.black26,
+            elevation: 0.0,
+            textColor: Theme.of(context).cardColor,
+            context: context,
+            onPressed: () =>
+                Modular.to.pushNamedAndRemoveUntil('/', (_) => false)),
       ],
     );
   }

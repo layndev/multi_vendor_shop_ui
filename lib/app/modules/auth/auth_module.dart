@@ -6,9 +6,7 @@ import 'presentation/pages/login_page.dart';
 
 class AuthModule extends ChildModule {
   @override
-  List<Bind> get binds => [
-        $AuthController,
-      ];
+  List<Bind> get binds => [$AuthController];
 
   @override
   List<ModularRouter> get routers => [
